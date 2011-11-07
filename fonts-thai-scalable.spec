@@ -13,6 +13,7 @@ Source0:	http://linux.thai.net/pub/thailinux/software/thaifonts-scalable/thaifon
 # Source0-md5:	4cdbb081bf0d180ead5e0f04149ff023
 URL:		http://linux.thai.net/projects/thaifonts-scalable
 BuildRequires:	fontforge >= 20080110
+BuildRequires:	xorg-app-mkfontscale
 %if %{with latex}
 BuildRequires:	texlive
 BuildRequires:	thailatex >= 0.4.6
