@@ -1,7 +1,6 @@
-# TODO: LaTeX deps and files
 #
 # Conditional build:
-%bcond_with	latex	# build LaTeX fonts
+%bcond_without	latex	# LaTeX fonts
 #
 Summary:	Collection of Thai scalable fonts
 Summary(pl.UTF-8):	Kolekcja skalowalnych fontów tajskich
@@ -14,7 +13,10 @@ Source0:	http://linux.thai.net/pub/thailinux/software/thaifonts-scalable/thaifon
 # Source0-md5:	4cdbb081bf0d180ead5e0f04149ff023
 URL:		http://linux.thai.net/projects/thaifonts-scalable
 BuildRequires:	fontforge >= 20080110
-%{?with_latex:BuildRequires:	afm2tfm, vptovf, kpsewhich, updmap, mktexlsr||texhash, thailatex >= 0.4.6}
+%if %{with latex}
+BuildRequires:	texlive
+BuildRequires:	thailatex >= 0.4.6
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -95,6 +97,30 @@ wzorcową.
 
 Ten pakiet zawiera fonty w formacie Type1.
 
+%package -n thailatex-fonts
+Summary:	Collection of Thai scalable fonts for LaTeX
+Summary(pl.UTF-8):	Kolekcja skalowalnych fontów tajskich dla LaTeXa
+Group:		Fonts
+Requires(post,postun):	texlive
+Requires:	texlive
+Requires:	thailatex >= 0.4.6
+
+%description -n thailatex-fonts
+thaifonts-scalable is a collection of Thai scalable fonts available in
+free licenses. Its goal is to provide fonts that conform to existing
+standards and recommendations, so that it can be a reference
+implementation.
+
+This package contains LaTeX fonts for use with thailatex.
+
+%description -n thailatex-fonts -l pl.UTF-8
+thaifonts-scalable to kolekcja fontów skalowalnych dostępnych na
+wolnych licencjach. Celem pakietu jest dostarczenie fontów zgodnych z
+istniejącymi standardami i rekomendacjami, aby był implementacją
+wzorcową.
+
+Ten pakiet zawiera fonty LaTeXowe do używania z pakietem thailatex.
+
 %prep
 %setup -q -n thaifonts-scalable-%{version}
 
@@ -106,7 +132,7 @@ Ten pakiet zawiera fonty w formacie Type1.
 	--with-otfdir=%{_fontsdir}/OTF \
 	--with-ttfdir=%{_fontsdir}/TTF \
 	--with-type1dir=%{_fontsdir}/Type1
-%{__make}
+%{__make} %{?with_latex:-j1}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -121,8 +147,35 @@ mkfontscale -o $RPM_BUILD_ROOT%{_fontsdir}/Type1/fonts.scale.thai-scalable $RPM_
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post	-n fonts-OTF-thai
+fontpostinst OTF
+
+%postun	-n fonts-OTF-thai
+fontpostinst OTF
+
+%post	-n fonts-TTF-thai
+fontpostinst TTF
+
+%postun	-n fonts-TTF-thai
+fontpostinst TTF
+
+%post	-n fonts-Type1-thai
+fontpostinst Type1
+
+%postun	-n fonts-Type1-thai
+fontpostinst Type1
+
+%post	-n thailatex-fonts
+umask 022
+%{_bindir}/texhash
+
+%postun	-n thailatex-fonts
+umask 022
+%{_bindir}/texhash
+
 %files -n fonts-OTF-thai
 %defattr(644,root,root,755)
+%doc AUTHORS COPYING ChangeLog NEWS README TODO
 %{_fontsdir}/OTF/Garuda*.otf
 %{_fontsdir}/OTF/Kinnari*.otf
 %{_fontsdir}/OTF/Loma*.otf
@@ -135,7 +188,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n fonts-TTF-thai
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog* NEWS README TODO
+%doc AUTHORS COPYING ChangeLog ChangeLog.thai-ttf NEWS README TODO
 %{_fontsdir}/TTF/Garuda*.ttf
 %{_fontsdir}/TTF/Kinnari*.ttf
 %{_fontsdir}/TTF/Loma*.ttf
@@ -150,7 +203,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n fonts-Type1-thai
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog* NEWS README TODO
+%doc AUTHORS COPYING ChangeLog NEWS README TODO
 %{_fontsdir}/Type1/Garuda*.pfb
 %{_fontsdir}/Type1/Kinnari*.pfb
 %{_fontsdir}/Type1/Loma*.pfb
@@ -170,3 +223,20 @@ rm -rf $RPM_BUILD_ROOT
 %{_fontsdir}/Type1/afm/Tlwg*.afm
 %{_fontsdir}/Type1/afm/Umpush*.afm
 %{_fontsdir}/Type1/afm/Waree*.afm
+
+%files -n thailatex-fonts
+%defattr(644,root,root,755)
+%doc AUTHORS COPYING ChangeLog NEWS README TODO
+%{_datadir}/texmf/fonts/afm/public/tlwg
+%{_datadir}/texmf/fonts/map/dvips/tlwg
+# dirs should belogin to texlive?
+%dir %{_datadir}/texmf/fonts/tfm
+%dir %{_datadir}/texmf/fonts/tfm/public
+%{_datadir}/texmf/fonts/tfm/public/tlwg
+%dir %{_datadir}/texmf/fonts/type1
+%dir %{_datadir}/texmf/fonts/type1/public
+%{_datadir}/texmf/fonts/type1/public/tlwg
+%dir %{_datadir}/texmf/fonts/vf
+%dir %{_datadir}/texmf/fonts/vf/public
+%{_datadir}/texmf/fonts/vf/public/tlwg
+%{_datadir}/texmf/tex/latex/fonts-tlwg
