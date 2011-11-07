@@ -230,14 +230,7 @@ umask 022
 %doc AUTHORS COPYING ChangeLog NEWS README TODO
 %{_datadir}/texmf/fonts/afm/public/tlwg
 %{_datadir}/texmf/fonts/map/dvips/tlwg
-# dirs should belogin to texlive?
-%dir %{_datadir}/texmf/fonts/tfm
-%dir %{_datadir}/texmf/fonts/tfm/public
 %{_datadir}/texmf/fonts/tfm/public/tlwg
-%dir %{_datadir}/texmf/fonts/type1
-%dir %{_datadir}/texmf/fonts/type1/public
 %{_datadir}/texmf/fonts/type1/public/tlwg
-%dir %{_datadir}/texmf/fonts/vf
-%dir %{_datadir}/texmf/fonts/vf/public
 %{_datadir}/texmf/fonts/vf/public/tlwg
 %{_datadir}/texmf/tex/latex/fonts-tlwg
