@@ -5,12 +5,12 @@
 Summary:	Collection of Thai scalable fonts
 Summary(pl.UTF-8):	Kolekcja skalowalnych fontów tajskich
 Name:		fonts-thai-scalable
-Version:	0.4.17
+Version:	0.5.0
 Release:	1
 License:	MIT (Waree font), GPL v2+ (the rest)
 Group:		Fonts
-Source0:	http://linux.thai.net/pub/thailinux/software/thaifonts-scalable/thaifonts-scalable-%{version}.tar.gz
-# Source0-md5:	4cdbb081bf0d180ead5e0f04149ff023
+Source0:	http://linux.thai.net/pub/thailinux/software/thaifonts-scalable/fonts-tlwg-%{version}.tar.gz
+# Source0-md5:	e407df4a9652aa1555e3dd5894d6ddd8
 URL:		http://linux.thai.net/projects/thaifonts-scalable
 BuildRequires:	fontforge >= 20080110
 BuildRequires:	xorg-app-mkfontscale
@@ -104,7 +104,7 @@ Summary(pl.UTF-8):	Kolekcja skalowalnych fontów tajskich dla LaTeXa
 Group:		Fonts
 Requires(post,postun):	texlive
 Requires:	texlive
-Requires:	thailatex >= 0.4.6
+Requires:	thailatex >= 0.4.7
 
 %description -n thailatex-fonts
 thaifonts-scalable is a collection of Thai scalable fonts available in
@@ -123,7 +123,7 @@ wzorcową.
 Ten pakiet zawiera fonty LaTeXowe do używania z pakietem thailatex.
 
 %prep
-%setup -q -n thaifonts-scalable-%{version}
+%setup -q -n fonts-tlwg-%{version}
 
 %build
 %configure \
@@ -228,9 +228,10 @@ umask 022
 %files -n thailatex-fonts
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README TODO
-%{_datadir}/texmf/fonts/afm/public/tlwg
-%{_datadir}/texmf/fonts/map/dvips/tlwg
-%{_datadir}/texmf/fonts/tfm/public/tlwg
-%{_datadir}/texmf/fonts/type1/public/tlwg
-%{_datadir}/texmf/fonts/vf/public/tlwg
+%{_datadir}/texmf/fonts/afm/public/fonts-tlwg
+%{_datadir}/texmf/fonts/enc/dvips/fonts-tlwg
+%{_datadir}/texmf/fonts/map/dvips/fonts-tlwg
+%{_datadir}/texmf/fonts/tfm/public/fonts-tlwg
+%{_datadir}/texmf/fonts/type1/public/fonts-tlwg
+%{_datadir}/texmf/fonts/vf/public/fonts-tlwg
 %{_datadir}/texmf/tex/latex/fonts-tlwg
