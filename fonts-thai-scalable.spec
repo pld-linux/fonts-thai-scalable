@@ -6,11 +6,12 @@ Summary:	Collection of Thai scalable fonts
 Summary(pl.UTF-8):	Kolekcja skalowalnych fontów tajskich
 Name:		fonts-thai-scalable
 Version:	0.5.0
-Release:	1
+Release:	2
 License:	MIT (Waree font), GPL v2+ (the rest)
 Group:		Fonts
 Source0:	http://linux.thai.net/pub/thailinux/software/thaifonts-scalable/fonts-tlwg-%{version}.tar.gz
 # Source0-md5:	e407df4a9652aa1555e3dd5894d6ddd8
+Patch0:		fontconfig-2.10.patch
 URL:		http://linux.thai.net/projects/thaifonts-scalable
 BuildRequires:	fontforge >= 20080110
 BuildRequires:	xorg-app-mkfontscale
@@ -124,8 +125,12 @@ Ten pakiet zawiera fonty LaTeXowe do używania z pakietem thailatex.
 
 %prep
 %setup -q -n fonts-tlwg-%{version}
+%patch0 -p1
 
 %build
+%{__aclocal}
+%{__autoconf}
+%{__automake}
 %configure \
 	%{?with_latex:--enable-latex} \
 	--enable-pfb \
@@ -199,8 +204,8 @@ umask 022
 %{_fontsdir}/TTF/Tlwg*.ttf
 %{_fontsdir}/TTF/Umpush*.ttf
 %{_fontsdir}/TTF/Waree*.ttf
-/etc/fonts/conf.avail/64-ttf-thai-tlwg.conf
-/etc/fonts/conf.avail/89-ttf-thai-tlwg-synthetic.conf
+%{_datadir}/fontconfig/conf.avail/64-ttf-thai-tlwg.conf
+%{_datadir}/fontconfig/conf.avail/89-ttf-thai-tlwg-synthetic.conf
 
 %files -n fonts-Type1-thai
 %defattr(644,root,root,755)
