@@ -5,12 +5,12 @@
 Summary:	Collection of Thai scalable fonts
 Summary(pl.UTF-8):	Kolekcja skalowalnych fontów tajskich
 Name:		fonts-thai-scalable
-Version:	0.5.1
+Version:	0.6.1
 Release:	1
 License:	MIT (Waree font), GPL v2+ (the rest)
 Group:		Fonts
 Source0:	http://linux.thai.net/pub/thailinux/software/thaifonts-scalable/fonts-tlwg-%{version}.tar.xz
-# Source0-md5:	e1889e2514e60ea32a77c813992d0cec
+# Source0-md5:	5ea5bc964d992df0428f2e0b85f48400
 Patch0:		fontconfig-2.10.patch
 URL:		http://linux.thai.net/projects/thaifonts-scalable
 BuildRequires:	autoconf >= 2.59
@@ -188,6 +188,7 @@ umask 022
 %doc AUTHORS COPYING ChangeLog NEWS README TODO
 %{_fontsdir}/OTF/Garuda*.otf
 %{_fontsdir}/OTF/Kinnari*.otf
+%{_fontsdir}/OTF/Laksaman*.otf
 %{_fontsdir}/OTF/Loma*.otf
 %{_fontsdir}/OTF/Norasi*.otf
 %{_fontsdir}/OTF/Purisa*.otf
@@ -201,6 +202,7 @@ umask 022
 %doc AUTHORS COPYING ChangeLog ChangeLog.thai-ttf NEWS README TODO
 %{_fontsdir}/TTF/Garuda*.ttf
 %{_fontsdir}/TTF/Kinnari*.ttf
+%{_fontsdir}/TTF/Laksaman*.ttf
 %{_fontsdir}/TTF/Loma*.ttf
 %{_fontsdir}/TTF/Norasi*.ttf
 %{_fontsdir}/TTF/Purisa*.ttf
@@ -208,14 +210,16 @@ umask 022
 %{_fontsdir}/TTF/Tlwg*.ttf
 %{_fontsdir}/TTF/Umpush*.ttf
 %{_fontsdir}/TTF/Waree*.ttf
-%{_datadir}/fontconfig/conf.avail/64-ttf-thai-tlwg.conf
-%{_datadir}/fontconfig/conf.avail/89-ttf-thai-tlwg-synthetic.conf
+%{_datadir}/fontconfig/conf.avail/64-??-tlwg-*.conf
+%{_datadir}/fontconfig/conf.avail/64-15-laksaman.conf
+%{_datadir}/fontconfig/conf.avail/89-tlwg-*-synthetic.conf
 
 %files -n fonts-Type1-thai
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README TODO
 %{_fontsdir}/Type1/Garuda*.pfb
 %{_fontsdir}/Type1/Kinnari*.pfb
+%{_fontsdir}/Type1/Laksaman*.pfb
 %{_fontsdir}/Type1/Loma*.pfb
 %{_fontsdir}/Type1/Norasi*.pfb
 %{_fontsdir}/Type1/Purisa*.pfb
@@ -226,6 +230,7 @@ umask 022
 %{_fontsdir}/Type1/fonts.scale.thai-scalable
 %{_fontsdir}/Type1/afm/Garuda*.afm
 %{_fontsdir}/Type1/afm/Kinnari*.afm
+%{_fontsdir}/Type1/afm/Laksaman*.afm
 %{_fontsdir}/Type1/afm/Loma*.afm
 %{_fontsdir}/Type1/afm/Norasi*.afm
 %{_fontsdir}/Type1/afm/Purisa*.afm
