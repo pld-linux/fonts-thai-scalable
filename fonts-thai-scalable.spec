@@ -5,16 +5,18 @@
 Summary:	Collection of Thai scalable fonts
 Summary(pl.UTF-8):	Kolekcja skalowalnych fontów tajskich
 Name:		fonts-thai-scalable
-Version:	0.6.5
+Version:	0.7.1
 Release:	1
 License:	MIT (Waree font), GPL v2+ (the rest)
 Group:		Fonts
 Source0:	https://linux.thai.net/pub/thailinux/software/thaifonts-scalable/fonts-tlwg-%{version}.tar.xz
-# Source0-md5:	4b3f2f80535681e8f66f78001d84f75d
+# Source0-md5:	be229a706fe0cbb92a091154608e3e68
 URL:		https://linux.thai.net/projects/thaifonts-scalable
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
-BuildRequires:	fontforge >= 20170730
+BuildRequires:	fontforge >= 20170731
+BuildRequires:	python >= 1:2.7
+BuildRequires:	python-fontforge >= 20170731
 BuildRequires:	xorg-app-mkfontscale
 %if %{with latex}
 BuildRequires:	texlive
@@ -135,8 +137,9 @@ Ten pakiet zawiera fonty LaTeXowe do używania z pakietem thailatex.
 %{__automake}
 %configure \
 	%{?with_latex:--enable-latex} \
-	--enable-pfb \
 	--enable-otf \
+	--enable-pfb \
+	--enable-ttf \
 	--with-otfdir=%{_fontsdir}/OTF \
 	--with-ttfdir=%{_fontsdir}/TTF \
 	--with-type1dir=%{_fontsdir}/Type1
@@ -149,7 +152,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_fontsdir}/Type1/afm
-mv $RPM_BUILD_ROOT%{_fontsdir}/Type1/*.afm $RPM_BUILD_ROOT%{_fontsdir}/Type1/afm
+%{__mv} $RPM_BUILD_ROOT%{_fontsdir}/Type1/*.afm $RPM_BUILD_ROOT%{_fontsdir}/Type1/afm
 mkfontscale -o $RPM_BUILD_ROOT%{_fontsdir}/Type1/fonts.scale.thai-scalable $RPM_BUILD_ROOT%{_fontsdir}/Type1
 
 %clean
@@ -183,7 +186,7 @@ umask 022
 
 %files -n fonts-OTF-thai
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README TODO
+%doc AUTHORS COPYING ChangeLog NEWS README
 %{_fontsdir}/OTF/Garuda*.otf
 %{_fontsdir}/OTF/Kinnari*.otf
 %{_fontsdir}/OTF/Laksaman*.otf
@@ -197,7 +200,7 @@ umask 022
 
 %files -n fonts-TTF-thai
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog ChangeLog.thai-ttf NEWS README TODO
+%doc AUTHORS COPYING ChangeLog ChangeLog.thai-ttf NEWS README
 %{_fontsdir}/TTF/Garuda*.ttf
 %{_fontsdir}/TTF/Kinnari*.ttf
 %{_fontsdir}/TTF/Laksaman*.ttf
@@ -214,7 +217,7 @@ umask 022
 
 %files -n fonts-Type1-thai
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README TODO
+%doc AUTHORS COPYING ChangeLog NEWS README
 %{_fontsdir}/Type1/Garuda*.pfb
 %{_fontsdir}/Type1/Kinnari*.pfb
 %{_fontsdir}/Type1/Laksaman*.pfb
@@ -239,10 +242,11 @@ umask 022
 
 %files -n thailatex-fonts
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README TODO
+%doc AUTHORS COPYING ChangeLog NEWS README
 %{_datadir}/texmf/fonts/afm/public/fonts-tlwg
 %{_datadir}/texmf/fonts/enc/dvips/fonts-tlwg
 %{_datadir}/texmf/fonts/map/dvips/fonts-tlwg
+%{_datadir}/texmf/fonts/opentype/public/fonts-tlwg
 %{_datadir}/texmf/fonts/tfm/public/fonts-tlwg
 %{_datadir}/texmf/fonts/type1/public/fonts-tlwg
 %{_datadir}/texmf/fonts/vf/public/fonts-tlwg
