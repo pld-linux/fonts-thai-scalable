@@ -5,20 +5,22 @@
 Summary:	Collection of Thai scalable fonts
 Summary(pl.UTF-8):	Kolekcja skalowalnych fontów tajskich
 Name:		fonts-thai-scalable
-Version:	0.7.1
+Version:	0.7.2
 Release:	1
 License:	MIT (Waree font), GPL v2+ (the rest)
 Group:		Fonts
 Source0:	https://linux.thai.net/pub/thailinux/software/thaifonts-scalable/fonts-tlwg-%{version}.tar.xz
-# Source0-md5:	be229a706fe0cbb92a091154608e3e68
+# Source0-md5:	22a6b951ecf150650bb1f11cca17aa52
 URL:		https://linux.thai.net/projects/thaifonts-scalable
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
-BuildRequires:	fontforge >= 20170731
-BuildRequires:	python >= 1:2.7
-BuildRequires:	python-fontforge >= 20170731
+BuildRequires:	fontforge >= 20190801
+BuildRequires:	python3 >= 1:3.7
+BuildRequires:	python3-fontforge >= 20190801
+BuildRequires:	rpmbuild(macros) >= 1.751
 BuildRequires:	xorg-app-mkfontscale
 %if %{with latex}
+# afm2tfm, vptovf, updmap-sys, mktexlsr
 BuildRequires:	texlive
 BuildRequires:	thailatex >= 0.4.6
 %endif
@@ -177,12 +179,10 @@ fontpostinst Type1
 fontpostinst Type1
 
 %post	-n thailatex-fonts
-umask 022
-%{_bindir}/texhash
+%texhash
 
 %postun	-n thailatex-fonts
-umask 022
-%{_bindir}/texhash
+%texhash
 
 %files -n fonts-OTF-thai
 %defattr(644,root,root,755)
