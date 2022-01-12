@@ -6,7 +6,7 @@ Summary:	Collection of Thai scalable fonts
 Summary(pl.UTF-8):	Kolekcja skalowalnych fontów tajskich
 Name:		fonts-thai-scalable
 Version:	0.7.3
-Release:	1
+Release:	2
 License:	MIT (Waree font), GPL v2+ (the rest)
 Group:		Fonts
 Source0:	https://linux.thai.net/pub/thailinux/software/thaifonts-scalable/fonts-tlwg-%{version}.tar.xz
@@ -26,6 +26,7 @@ BuildRequires:	thailatex >= 0.4.6
 %endif
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
